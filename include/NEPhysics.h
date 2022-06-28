@@ -21,7 +21,8 @@
  */
 
 /*! \def    #define NE_DEFAULT_PHYSICS  128 */
-#define NE_DEFAULT_PHYSICS  64
+//#define NE_DEFAULT_PHYSICS  64
+#define NE_DEFAULT_PHYSICS 240
 
 /*! \def    #define NE_MIN_BOUNCE_SPEED (floattof32(0.01))
  *  \brief  Minimun speed that an object has to have to bounce. If it has less
@@ -32,25 +33,28 @@
 /*! \enum NE_PhysicsTypes
  *  \brief Object types used in physics engine.
  */
-typedef enum {
-	NE_BoundingBox		= 1,	/*!< Bounding box. */
-	NE_BoundingSphere	= 2,	/*!< Bounding sphere. */
-	NE_Dot			= 3	/*!< Use this with really small objects. */
+typedef enum
+{
+	NE_BoundingBox = 1,	   /*!< Bounding box. */
+	NE_BoundingSphere = 2, /*!< Bounding sphere. */
+	NE_Dot = 3			   /*!< Use this with really small objects. */
 } NE_PhysicsTypes;
 
 /*! \enum NE_OnCollision
  *  \brief Possible actions that can be applied to an object after a collision.
  */
-typedef enum {
-	NE_ColNothing = 0,	/*!< Ignore the object. */
-	NE_ColBounce,		/*!< Bounce against the object. */
-	NE_ColStop		/*!< Stop. */
+typedef enum
+{
+	NE_ColNothing = 0, /*!< Ignore the object. */
+	NE_ColBounce,	   /*!< Bounce against the object. */
+	NE_ColStop		   /*!< Stop. */
 } NE_OnCollision;
 
 /*! \struct NE_Physics
  *  \brief  Holds information of a physics object.
  */
-typedef struct {
+typedef struct
+{
 	// Every fixed point variable in this struct is f32
 
 	NE_Model *model;
@@ -74,9 +78,13 @@ typedef struct {
 	NE_OnCollision oncollision;
 	// true if a collision was detected during the last update of the model
 	bool iscolliding;
+	bool lastIscolliding;
+	bool iscollidingTrigger;
 
 	// Objects only collide with other objects in the same physicsgroup
-	int physicsgroup;
+	//int physicsgroup;
+	int physicsgroupCount;
+	int physicsgroup[2];
 } NE_Physics;
 
 /*! \fn    NE_Physics *NE_PhysicsCreate(NE_PhysicsTypes type);
@@ -222,7 +230,7 @@ void NE_PhysicsSetModel(NE_Physics *physics, void *modelpointer);
  *
  * NOTE: Collisions do only work between objects with the same group.
  */
-void NE_PhysicsSetGroup(NE_Physics *physics, int group);
+void NE_PhysicsSetGroup(NE_Physics *physics, int group, int index);
 
 /*! \fn    void NE_PhysicsOnCollision(NE_Physics *physics,
  *                                    NE_OnCollision action);

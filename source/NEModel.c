@@ -295,6 +295,7 @@ static void __ne_drawanimatedmodel_nointerpolate(NE_AnimData *anim)
 
 // Internal use... see below
 extern bool NE_TestTouch;
+GLvector tex_scale2 = { 64<<16, -64<<16, 1<<16 };
 
 void NE_ModelDraw(NE_Model *model)
 {
@@ -307,9 +308,11 @@ void NE_ModelDraw(NE_Model *model)
 
 	MATRIX_PUSH = 0;
 
-	MATRIX_TRANSLATE = model->x;
+	/*MATRIX_TRANSLATE = model->x;
 	MATRIX_TRANSLATE = model->y;
-	MATRIX_TRANSLATE = model->z;
+	MATRIX_TRANSLATE = model->z;*/
+
+	glTranslatef32(model->x, model->y, model->z);
 
 	if (model->rx != 0)
 		glRotateXi(model->rx << 6);
@@ -329,6 +332,8 @@ void NE_ModelDraw(NE_Model *model)
 		// to 0 and GFX_COLOR to white
 		NE_MaterialUse(model->texture);
 	}
+	
+	//glTexParameter(0, GL_TEXTURE_WRAP_S | GL_TEXTURE_FLIP_S);
 
 	if (model->modeltype == NE_Static) {
 		glCallList(model->meshdata);

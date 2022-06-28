@@ -135,6 +135,12 @@ void NE_SwapScreens(void);
  */
 void NE_Viewport(int x1, int y1, int x2, int y2);
 
+/*! \fn    void NE_SetFov(int fovValue);
+ *  \brief Set cameras Fov.
+ *  \param fovValue Fov [0,...].
+ */
+void NE_SetFov(int fovValue);
+
 /*! \fn    void NE_ClippingPlanesSetI(int znear, int zfar);
  *  \brief Set near and far clipping planes.
  *  \param znear Near plane.

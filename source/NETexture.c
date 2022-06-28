@@ -426,6 +426,8 @@ void NE_MaterialUse(NE_Material *tex)
 
 	GFX_COLOR = (u32) tex->color;
 	GFX_TEX_FORMAT = NE_Texture[tex->texindex].param;
+	//GFX_TEX_COORD = GL_TEXTURE_WRAP_S | GL_TEXTURE_FLIP_S | GL_TEXTURE_WRAP_T | GL_TEXTURE_FLIP_T;
+ 	//glTexParameter(0, GL_TEXTURE_WRAP_S);
 }
 
 extern bool NE_Dual;

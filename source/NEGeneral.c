@@ -26,6 +26,7 @@ static bool ne_inited = false;
 static SpriteEntry *NE_Sprites;	//For Dual 3D mode
 
 static int ne_znear, ne_zfar;
+static int fov;
 
 void NE_End(void)
 {
@@ -82,10 +83,15 @@ void NE_Viewport(int x1, int y1, int x2, int y2)
 
 	MATRIX_CONTROL = GL_PROJECTION;	//New projection matix for this viewport
 	MATRIX_IDENTITY = 0;
-	gluPerspectivef32(70 * DEGREES_IN_CIRCLE / 360, NE_screenratio,
+	gluPerspectivef32(fov * DEGREES_IN_CIRCLE / 360, NE_screenratio,
 			  ne_znear, ne_zfar);
 
 	MATRIX_CONTROL = GL_MODELVIEW;
+}
+
+void NE_SetFov(int fovValue)
+{
+	fov = fovValue;
 }
 
 static void NE_Init__(void)
@@ -153,6 +159,7 @@ static void NE_Init__(void)
 
 	ne_znear = floattof32(0.1);
 	ne_zfar = floattof32(40.0);
+	fov = 70;
 	NE_Viewport(0, 0, 255, 191);
 
 	glMatrixMode(GL_MODELVIEW);
@@ -278,7 +285,7 @@ void NE_SetConsoleColor(u32 color)
 
 void NE_Process(NE_Voidfunc drawscene)
 {
-	NE_UpdateInput();
+	//NE_UpdateInput();
 
 	glViewport(NE_viewport[0], NE_viewport[1], NE_viewport[2],
 		   NE_viewport[3]);
@@ -287,7 +294,7 @@ void NE_Process(NE_Voidfunc drawscene)
 
 	MATRIX_CONTROL = GL_PROJECTION;
 	MATRIX_IDENTITY = 0;
-	gluPerspectivef32(70 * DEGREES_IN_CIRCLE / 360, NE_screenratio,
+	gluPerspectivef32(fov * DEGREES_IN_CIRCLE / 360, NE_screenratio,
 			  ne_znear, ne_zfar);
 
 	MATRIX_CONTROL = GL_MODELVIEW;
@@ -301,7 +308,7 @@ void NE_Process(NE_Voidfunc drawscene)
 
 void NE_ProcessDual(NE_Voidfunc topscreen, NE_Voidfunc downscreen)
 {
-	NE_UpdateInput();
+	//NE_UpdateInput();
 
 	REG_POWERCNT ^= POWER_SWAP_LCDS;
 	NE_Screen ^= 1;
@@ -348,7 +355,7 @@ void NE_ProcessDual(NE_Voidfunc topscreen, NE_Voidfunc downscreen)
 
 	MATRIX_CONTROL = GL_PROJECTION;
 	MATRIX_IDENTITY = 0;
-	gluPerspectivef32(70 * DEGREES_IN_CIRCLE / 360,
+	gluPerspectivef32(fov * DEGREES_IN_CIRCLE / 360,
 			  floattof32(256.0 / 192.0), ne_znear, ne_zfar);
 
 	MATRIX_CONTROL = GL_MODELVIEW;

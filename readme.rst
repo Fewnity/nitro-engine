@@ -1,6 +1,14 @@
 Nitro Engine v0.7.0
 ===================
 
+Updated engine for [Counter Strike Nintendo DS](https://github.com/Fewnity/Counter-Strike-Nintendo-DS).
+Added features :
+- SetFov function
+- Increase the physics limit
+- Improved Physics groups to disable collisions between some collider
+- Texture wrap enabled
+- Small fixes
+
 Introduction
 ------------
 

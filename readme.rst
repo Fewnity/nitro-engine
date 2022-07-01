@@ -11,6 +11,11 @@ Added features for CS
 - Texture wrap enabled
 - Small fixes
 
+TODO
+------------
+- Improve animation performance
+- Fix collision system
+
 Introduction
 ------------
 

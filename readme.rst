@@ -1,7 +1,7 @@
 Nitro Engine v0.7.0
 ===================
 
-Updated engine for [Counter Strike Nintendo DS](https://github.com/Fewnity/Counter-Strike-Nintendo-DS).
+Updated engine for Counter Strike Nintendo DS Link : https://github.com/Fewnity/Counter-Strike-Nintendo-DS
 
 Added features for CS
 ------------

@@ -16,6 +16,7 @@ TODO
 - Improve animation performance
 - Fix collision system
 - Float position for text
+- Add real 2D support (without the 3D engine)
 
 Introduction
 ------------

@@ -15,6 +15,7 @@ TODO
 ------------
 - Improve animation performance
 - Fix collision system
+- Float position for text
 
 Introduction
 ------------
